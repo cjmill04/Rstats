@@ -1,0 +1,59 @@
+---
+title: "Intro to R and RStudio"
+output:
+  html_document: default
+  html_notebook: default
+---
+
+<h2>Installing R and RStudio</h2>
+R is free, open source software for statistical computing and graphics. If you're interested in the history of R or the GNU free software movement, check out the [R FAQs page](https://www.r-project.org).
+
+The reason we're learning R (as opposed to something like SAS) is because it is commonly used for data analysis in ecology, biology, and natural resources. Because it is free software, code can be shared with any collaborators and they don't need to purchase software. It is also capable of doing basically anything you want it to do, assuming you can figure out how to program it. 
+
+If you don't already have R installed on your computer, go to [this website](https://cran.r-project.org/) and download the appropriate version for your operating system.
+
+Because R is a program run from the command line, most users will want to use a graphical user interface (GUI) to interact with it. The most frequently used GUI for R is RStudio, which is what we will be using. Go to the [RStudio website](https://www.rstudio.com/products/rstudio/download3/) to download and install RStudio if you don't already have it. RStudio makes it even easier to save your code so you can go back in and make changes. Because this class uses R Notebooks, you need to update to the latest version if your RStudio doesn't have Notebooks. 
+
+<h2>Exploring RStudio</h2>
+
+By default, the upper left corner of RStudio is the Source pane. The source pane is where you can enter code or markdown text without running it. This is useful if you want to save your code and be able to go back and edit it. To run code from the source pane, you can either ctrl+enter through each line, highlight a chunk and ctrl+enter, or use the point-and-click "Run" button in the upper right corner. 
+
+When you run a script (.R) it will be shown in the Console, which by default is the bottom left corner. The console will print the code that you run from the source pane. This is what R looks like when not using R studio. Pay attention to errors and warning messages that appear in the console. Do not work from the console unless you don't want to save the code that you're working on.
+
+In the upper right corner and lower right corner, there are a number of tabs: Environment, History, Files, Packages, Help, Plots, etc... These are areas where you can see different aspects of the project or code you are working on. Explore these tabs to see what is categorized under them.
+
+If you want to change the arrangement of where your panes are or which pane different tabs appear in, go to Tools > Global Options > Pane Layout. You can also change the fonts and color scheme of your scripts, markdown, and console, by going to Tools > Global Options > Appearance.
+
+<h2>Packages</h2>
+
+Packages are collections of code, functions, and data that are compiled by other users of R and compiled in the CRAN repository. R-base comes with many useful packages pre-loaded, which you can see in your Packages tab. 
+
+To install new packages, you can point-and-click on the Install button under the Packages tab, or you can use install.packages("") and Ctrl+enter in an R script. Try installing the following packages: dplyr, tidyr, ggplot2, swirl, knitr.
+
+Once your run your script, notice that the console is going to run through a bunch of lines of text when you install the package. You will be able to tell when it is done because the prompt <b>></b> will appear. Check to make sure that there were no warnings and that you didn't get a zero exit status message. 
+
+Even though you have the packages installed, you need to tell R that you want to load them each time you start a session. You can do this with library() and put the name of the package you want to load inside the parentheses without quotes. 
+
+```{r}
+library(swirl)
+```
+
+<h2>Getting help</h2>
+To find out what a function does, type ? followed by the function name. For example, you can type ?install.packages and the Help window will pull up the R documentation for that function. 
+
+If you aren't sure if something is a function or you want to find all the documentation related to a topic, you can use ?? followed by the function name. For example, you could type ??ecology and see what packages match your search terms. 
+
+You can also search for help on things that aren't functions, such as data frames. 
+
+<h2>Practicing basic syntax and programming in R</h2>
+Rather than spending a lot of in-class time going over basic syntax, you should work through the Swirl course "R Programming" on your own time to get familiar with programming in R.
+
+1) First, install the package "swirl" using install.packages("")
+
+2) Next, load swirl using library(swirl)
+
+3) Follow the prompts
+
+4) Install the course R Programming using install_course("R Programming")
+
+5) Work through lessons 1-4.
