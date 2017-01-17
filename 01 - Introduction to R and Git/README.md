@@ -1,7 +1,7 @@
 <h3>Objectives for part 1</h3>
-<br> -- Have up to date software for R and RStudio
-<br> -- Know how to navigate and customize RStudio
-<br> -- Understand packages and how to use them
+<ul><li>Have up to date software for R and RStudio
+<li>Know how to navigate and customize RStudio
+</ul><br> -- Understand packages and how to use them
 <br> -- Learn basic syntax
 <br> -- Know where to get help in RStudio
  
