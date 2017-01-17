@@ -1,14 +1,14 @@
-Objectives for part 1:
- -- Have up to date software for R and RStudio
- -- Know how to navigate and customize RStudio
- -- Understand packages and how to use them
- -- Learn basic syntax
- -- Know where to get help in RStudio
+<h3>Objectives for part 1</h3>
+<br> -- Have up to date software for R and RStudio
+<br> -- Know how to navigate and customize RStudio
+<br> -- Understand packages and how to use them
+<br> -- Learn basic syntax
+<br> -- Know where to get help in RStudio
  
- Objectives for part 2:
- -- Install Git and create a GitHub account
- -- Connect GitHub to RStudio
- -- Be able to fork and clone repositories
- -- Make changes to an offline repository and push those changes to a remote repository
- -- Initiate a pull request and interact with other peoples' repositories
+<h3>Objectives for part 2:</h3>
+<br> -- Install Git and create a GitHub account
+<br> -- Connect GitHub to RStudio
+<br> -- Be able to fork and clone repositories
+<br> -- Make changes to an offline repository and push those changes to a remote repository
+<br> -- Initiate a pull request and interact with other peoples' repositories
  
