@@ -3,14 +3,14 @@
 Introduction to Biological Data Analysis in R is an informal, participant-led "seminar" on basic statistics and R at the University of Connecticut. All sessions are taught by current undergraduate and graduate students in EEB and NRE. The goal of the class is to provide participants with a basic set of skills to do research and analysis in ecology, evolutionary biology, environmental science, and natural resources.
 
 <h3>Week 1 - Introduction to R and Git</h3>
-Instructor: Eliza Grames
+Instructor: Eliza Grames<br>
 Helpers: Liz Clifton, Becca Colby
 
 <h3>Week 2 - Data Storage</h3>
 Instructor: Nick Russo
 
 <h3>Week 3 - Functions and Common Tasks</h3>
-Instructor: Genevieve Nuttall
+Instructor: Genevieve Nuttall<br>
 Helper: Eliza Grames
 
 <h3>Week 4 - Data Manipulation</h3>
