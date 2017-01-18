@@ -4,7 +4,7 @@ Introduction to Biological Data Analysis in R is an informal, participant-led "s
 
 <h3>Week 1 - Introduction to R and Git</h3>
 Instructor: Eliza Grames<br>
-Helpers: Liz Clifton, Becca Colby
+Helpers: Liz Clifton, Becca Colby, Val Milici, Eileen Schaub
 
 <h3>Week 2 - Data Storage</h3>
 Instructor: Nick Russo
