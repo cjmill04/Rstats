@@ -1,0 +1,13 @@
+"","Point","Site","Location","Duration","species_count"
+"1",1,"A","Edge","5",12
+"2",2,"B","Edge","5",10
+"3",3,"C","Edge","5",13
+"4",4,"A","Interior","5",11
+"5",5,"B","Interior","5",13
+"6",6,"C","Interior","5",12
+"7",7,"A","Edge","10",19
+"8",8,"B","Edge","10",10
+"9",9,"C","Edge","10",12
+"10",10,"A","Interior","10",11
+"11",11,"B","Interior","10",21
+"12",12,"C","Interior","10",12

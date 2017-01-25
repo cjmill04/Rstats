@@ -1,3 +1,10 @@
+<<<<<<< HEAD
 *.Rproj
 *.nb.html
 .Rproj.user
+=======
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+>>>>>>> 8bc2875ef429010a2728b8377e3e6564a87ca32e
