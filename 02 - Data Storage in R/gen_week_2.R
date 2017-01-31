@@ -56,3 +56,4 @@ write.csv(Birds,"birdtable.csv")
 last.row<-c(13,"A","Edge","10",39)
 birds2<-rbind(bird.table,last.row)
 last.row<-c(13,"A","Edge",10,39)
+
