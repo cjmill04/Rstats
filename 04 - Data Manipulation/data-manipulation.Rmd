@@ -1,0 +1,145 @@
+---
+title: "Data Manipulation"
+output: html_notebook
+---
+
+We're just going to scratch the surface of what dplyr can do today. If you really want to go in depth, you should check out the documentation [or a tutorial that's recommended by the guy who created dplyr, Hadley Wickham](https://www.datacamp.com/courses/dplyr-data-manipulation-r-tutorial) (unless videos aren't your thing). The goal of this portion of the class is really just to introduce you to the basic capabilities of dplyr and let you figure out the rest on your own. Keep in mind that stackexchange and other forums are great sources when you need help finding what to do with your data!
+
+First of all, why do we want to manipulate data? Quite simply, you won't always have your data in a form that can be interpreted by functions in R that you want to use because they were built by someone to use on a different form of data and you need to transform what you collected. Or maybe you want to keep all the code for how you generated your transformed data so that other people (like your collaborators) understand what you did. 
+
+You can do some things with the base R package, like cbind() or rbind() that Nick showed us last week or some other functions, but they're all somewhat clunky. There are specific packages built just for data manipulation that do things more quickly and effectively; dplyr is one of the most popular data manipulation packages so that's what we'll focus on today. 
+
+<h2>Loading data</h2>
+
+First, we'll load the dplyr with library() Then load the HWA data from Week 2 and use head() to see the first few rows.
+
+```{r}
+HWAdata <- read.csv("~/Documents/Rstats/02 - Data Storage in R/HWA_Data.csv")
+head(HWAdata)
+```
+
+<h2>Selecting columns</h2>
+There's 13 columns in HWAdata, but let's say I'm really only interested in working with some of them because I don't care about the Branch ID, sample number, or time of day a bird is caught. We can select to only include certain columns with the select() function in dplyr. 
+
+I'm going to put the pared down data into a data frame that is also called "HWAdata", which means I'm saving over the previous dataset with the same name. Note that I don't need to specify HWAdata$DensClass and can just put DensClass because dplyr is smart and finds the column names by itself. 
+
+```{r}
+HWAdata <- select(HWAdata, DensClass, Height..m., BirdID, Ovisacs, CrawlerCount)
+head(HWAdata)
+```
+
+<h2>Filtering data</h2> 
+In addition to selecting only some columns from a data frame, we can also filter to only include certain rows. Let's say we want to create a new data frame that only includes observations of Common Yellowthroats. We can use filter() for this.
+
+```{r}
+COYEdata <- filter(HWAdata, BirdID=="COYE")
+COYEdata
+
+```
+
+<h2>Adding new columns</h2>
+You can create new columns based on existing ones using mutate(). You can either type out the changes directly, or you can use a function. The example below shows two different ways to change height from meters to feet - the first is a direct calculation, and in the other one we store a function and call that function. 
+
+```{r}
+
+COYEdata <- mutate(COYEdata, height.ft = (Height..m.*3.28084))
+COYEdata
+
+m2ft <- function(x) {ft <- x*3.28084
+return(ft)}
+COYEdata2 <- mutate(COYEdata, height.ft = m2f(Height..m.))
+COYEdata2
+
+```
+
+<h2>Grouping, summarizing, and counting</h2>
+
+You can summarize data (e.g. get the mean) or count the number of occurrence of a value by groups. 
+
+```{r}
+
+crawl.per.spec <- summarize(group_by(HWAdata, BirdID), mean(CrawlerCount, na.rm=TRUE))
+crawl.per.spec
+
+count.bird <- count(group_by(HWAdata, DensClass), BirdID)
+count.bird
+
+```
+
+<h2>Piping commands</h2>
+
+Piping is a way to streamline commands by sending the output from one command to the next step so that you don't have to type out as many lines of code. %>% is the symbol for piping. 
+
+```{r}
+YEWA.NAWA.CAWA <- HWAdata %>% 
+  select(DensClass, Height..m., BirdID, Ovisacs, CrawlerCount) %>% 
+  filter(BirdID==c("YEWA", "NAWA","CAWA")) %>%
+  group_by(BirdID) %>%
+  summarize(mean(CrawlerCount)) %>%
+  print(YEWA.NAWA.CAWA)
+```
+
+<h2>Recombining and splitting data with tidyr</h2>
+
+tidyr is a package that is useful for when you need to reconfigure your data. For example, maybe your data is wide (each column is a variable and each row is an observation) and you want it to be tall (each observation gets multiple rows). 
+
+```{r}
+#example of tall data
+
+tall.data <- data.frame(bird = c("OVEN", "OVEN", "RBGR", "RBGR", "ALFL", "ALFL"),
+                        site = c("A", "B", "A", "B", "A", "B"),
+                        count = c(14, 6, 18, 7, 9, 32))
+
+tall.data
+
+#example of wide data
+wide.data <- data.frame(bird = c("OVEN", "RBGR", "ALFL"),
+                           siteA = c(34, 12, 8),
+                           siteB = c(14, 16, 28)
+                           )
+wide.data
+
+point.counts <- wide.data
+
+```
+
+The gather() function can be used to turn wide data into tall data. 
+
+```{r}
+pc.gath <- point.counts %>% gather(site, count, siteA:siteB)
+pc.gath
+```
+
+The opposite of gather() is spread().
+
+```{r}
+pc.spread <- pc.gath %>% spread(site, count)
+pc.spread
+```
+
+
+You can also unite() columns into one column and then split them apart with separate().
+
+```{r}
+pc.unite <- point.counts %>% unite(total, siteA, siteB)
+pc.unite
+
+pc.sep <- pc.unite %>% separate(total, into=c("siteA", "siteB"))
+pc.sep
+```
+
+<h2>Transposing matrices and data frames </h2>
+
+Because tidyr assumes that each column is a variable and each row is an observation, you may need to transpose your data if you have it stored with each row as a variable and each column as an observation. You can do this in the base-r package with t().
+
+Notice in the example below that transposing the data frame forces all the numbers to be characters because R recognizes columns as vectors and forces all elements to be of the same class. When we transpose the transpose, it is not the same as the original because all the elements are still characters. 
+
+```{r}
+transpose.pc <- t(point.counts)
+transpose.pc
+
+reg.pc <- t(transpose.pc)
+reg.pc
+
+```
+
