@@ -1,4 +1,16 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+*.Rproj
+*.nb.html
+.Rproj.user
+=======
+>>>>>>> upstream/master
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
+<<<<<<< HEAD
+=======
+>>>>>>> 8bc2875ef429010a2728b8377e3e6564a87ca32e
+>>>>>>> upstream/master

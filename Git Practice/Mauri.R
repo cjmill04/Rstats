@@ -1,2 +1,0 @@
-mauri <- "Mauri Liberati"
-mauri
