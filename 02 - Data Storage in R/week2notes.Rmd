@@ -1,0 +1,124 @@
+---
+title: "Week 2 Notes and Scripts"
+output:
+  html_document: default
+  html_notebook: default
+---
+
+<h2>Importing Data</h2>
+To import the dataset, you first need to set your working directory and then check that you're in the correct directory using the getwd command.
+```{r}
+getwd()
+```
+
+Most data that you'll work with in your research will be saved as a .csv file, which stands for comma separated values. To import a csv file into R so that you can work with the data, use read.csv and assign the data to a variable name (in this case, we're calling it data). To check that you've got the right data, you can use head() to see the top few rows. If you want to remove data, you can use rm() and that will clear the data from your environment. 
+```{r}
+data <- read.csv("HWA_Data.csv")
+head(data)
+rm(data)
+```
+
+<h2>Character Vectors</h2>
+
+Vectors are a string of elements. For numeric vectors, you can either specify a sequence or use a colon to separate numbers. 
+
+```{r}
+Point <- seq(1,12)
+point <- 1:12
+print(Point)
+print(point)
+```
+
+Character vectors are strings, so you can input names or non-numeric values. You can create a character (or any type of vector) by concatenating elements together with c(). If you want to repeat the same values, you can use the rep() command within the c() command and specify how many times you want to repeat it. If you put elements in quotes, even if they're numbers, they'll be interpreted as characters. 
+
+```{r}
+Site <- c("A", "B", "C",
+          "A", "B", "C",
+          "A", "B", "C",
+          "A", "B", "C")
+site <- rep(c("A","B","C"),4)
+print(Site)
+print(site)
+
+location <- rep(c("Edge","Interior"), each=3, length=12)
+location
+
+duration <- rep(c("5","10"),each=6, length=12)
+duration
+
+```
+
+To check the structure of a vector, you can use structure() and then the name of the vector and it will tell you the type, how long it is, and the values. You can also use summary() to get the length and class of the elements. 
+
+```{r}
+str(duration)
+summary(duration)
+```
+
+<h2>Numeric Vectors</h2>
+
+To do a numeric vector, you can concatenate numbers without quotes and it will recognize them as numbers. 
+
+```{r}
+species.count <- c(12, 10, 13, 11, 13, 12, 19, 10, 12, 11, 21, 12)
+```
+
+<h2>Logical Vectors</h2>
+
+A logical vector will simply tell you if a vector that you enter is true or false. In the code below, the brackets [] signal that we're indexing data, so we only want part of the data. The which() asks to return which indexed values of the vector match the specifications and will return those values. 
+
+```{r}
+logic <- species.count >12
+species.count[which(logic)]
+```
+
+
+<h2>Factors</h2>
+By factoring vectors, you're telling a vector which categories a vector includes so it knows what is allowed in the vector. For example, in our location vector, the factors are "5" and "10". When using categorical values, you may want to set your factors (e.g. when using ANOVA). If you get errors in R, you might need to factor the data so that it recognizes how many factors a vector has.
+
+If you assign a level that is NOT part of your vector, nothing will happen because R is just recognizing that it's an option in the future. For example, maybe you wanted to add a Matrix site in the future but didn't have it in your data yet. However, if you enter an element to a vector that is NOT a factor, then it will show up as <NA> because it isn't allowed in your vector. 
+
+```{r}
+SiteFactor <- factor(site, levels=c("A", "B", "C"))
+SiteFactor
+LocationFactor <- factor(location, levels=c("Edge", "Interior", "Matrix"))
+LocationFactor
+DurationFactor <- factor(duration, levels=c("5","10"))
+DurationFactor
+```
+
+<h2>Creating a Table</h2>
+
+To create a data table, you can combine your vectors into a data frame using either cbind() (which stands for column bind) or rbind(), which stands for row bind.
+
+```{r}
+bird.table <- cbind(point, site, location, duration, species.count)
+bird.table
+```
+
+Right now this is only stored as bird.table, and we want to make it a data frame so that we can export is as a csv. When you write.csv, make sure to include the .csv at the end of the new file name. It will save it into your working directory. 
+
+```{r}
+as.data.frame(bird.table)
+write.csv(bird.table, "bird.table.csv")
+```
+
+You can also directly create a data frame instead of rbind() or cbind(). You can then export this as well using write.csv(). If you want to do any calculations or manipulations, you'll need the data as a table instead of as a data frame. 
+
+```{r}
+birds <- data.frame(point, site, location, duration, species.count)
+birds
+write.csv(birds, "birds.csv")
+
+```
+
+<h2>Adding observations to a table</h2>
+
+Let's say you have a lot of point count data, and you want to add another observation. You can create a row vector and rbind() it to the data table. One thing to note is that R forces all elements of a vector to be the same form, so it will force numeric elements to be characters. 
+
+```{r}
+new.row <- c(13,"A","Edge","10",39)
+bird.table2 <- rbind(bird.table,new.row)
+bird.table2
+```
+
